@@ -10,4 +10,3 @@
     $page->database = 'database.csv'; //wskazujemy jaki plik ma być bazą daynych
     $page->Show(); //wyświetlenie strony
 ?>
-
