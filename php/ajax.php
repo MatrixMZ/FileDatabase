@@ -27,7 +27,7 @@ class AjaxDataModifier
             $this->UserEdit($this->array, $this->row, $this->person);
         }
         //zapis do pliku
-        @$this->SaveFile('test.csv', $this->array);
+        @$this->SaveFile($this->dbfile, $this->array);
     }
     
     public function ReadFile(&$x)
@@ -61,29 +61,28 @@ class AjaxDataModifier
     }
     public function UserAdd(&$data, $person)
     {
-        $last = count($data);
-        $data[$last] = $last.';'.$person[0].';'.$person[1].';'.$person[2];
-        echo $data[$last];
+        $last = $this->db[0][0];
+        $lastl = count($data);
+        foreach($this->db as $line)
+        {
+            if($last <= $line[0])
+            {
+                $last = $line[0];
+            }
+        }
+
+        $data[$lastl] = $last + 1 .';'.$person[0].';'.$person[1].';'.$person[2];
+        echo '<h3>Dodano osobę: '.$person[0].' '.$person[1].'</h3><br /><a href="index.php">Reload</a>';
     }
     public function UserDelete($data, $row)
     {
-//        $i=0;
-//        foreach($data as $key => $line)
-//        {
-//            if($line != $key)
-//            {
-//                $data[$i] = $line;
-//                echo $data[$i].'<br />';
-//                $i++;
-//            }
-//        }
         $i=0;
         foreach($data as $x => $line)
         {
             if($x != $row)
             {
                 $tab[$i] = $line;
-                echo $tab[$i].'<br />';
+                //echo $tab[$i].'<br />';
                 $i++;
             }
 
@@ -94,7 +93,7 @@ class AjaxDataModifier
     public function UserEdit(&$data, $row, $person)
     {
         $data[$row] = $row.';'.$person[0].';'.$person[1].';'.$person[2];
-        echo $data[$row];
+        echo '<h3>Nadpisano dane: '.$person[0].' '.$person[1].' '.$person[2].'</h3><br /><a href="index.php">Reload</a>';
     }
     public function SaveFile($file, $data)
     {
@@ -123,6 +122,7 @@ if(isset($_POST['option'])){
 if($_POST['option'] == 'delete')
 {
     $ajax->row = $_POST['row'];
+    echo '<h3>Usunięto wiersz</h3><br /><a href="index.php">Reload</a>';
 }
 else if($_POST['option'] == 'add')
 {
