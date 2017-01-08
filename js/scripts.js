@@ -37,7 +37,19 @@ $("span.glyphicon-trash").click(function(){
     });
     
 });
-
+$("span.glyphicon-pencil").click(function(){
+    var row = $(this).closest("tr").attr('row');
+    var one = $('tr[row='+row+'] td[num=1]').text();
+    var two = $('tr[row='+row+'] td[num=2]').text();
+    var three = $('tr[row='+row+'] td[num=3]').text();
+    $('tr[row='+row+']').html('<td>'+row+'</td><td><input value="'+one+'" id="name'+row+'" type="text" class="form-control" /></td><td><input id="lastname'+row+'" value="'+two+'" type="text" class="form-control" /></td><td><input id="pesel'+row+'" value="'+three+'" type="text" class="form-control" /></td><td><span class="sendedit glyphicon glyphicon-ok"></span> <span class="glyphicon glyphicon-remove"></span></td>');
+});
+$('.sendedit').click(function(){
+    var row = $(this).closest('tr').attr('row');
+    //var name = $('input[id=name'+row+']').attr('value');
+   alert('kappa');
+    $(this).html(row);
+});
 $("#adduser").click(function(){
     var pesel = $('#pesel').val();
     var name = $('#name').val();

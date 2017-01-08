@@ -10,4 +10,15 @@
     transition-duration: 0.2s;
     transform: scale(1.4,1.4);
 }
-
+.glyphicon-ok:hover
+{
+    color: #1b8e1f;
+    transition-duration: 0.2s;
+    transform: scale(1.4,1.4);
+}
+.glyphicon-remove:hover
+{
+    color: #931414;
+    transition-duration: 0.2s;
+    transform: scale(1.4,1.4);
+}
