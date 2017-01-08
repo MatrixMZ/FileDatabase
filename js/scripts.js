@@ -1,27 +1,3 @@
-$("[xd]").click(function() {
-var x = $(this).attr('x');
-var y = $(this).attr('y');
-alert('kappa');
-var text = $(this).html();
-    $.ajax({
-        type: "POST",
-        url: "php/ajax.php",
-        data: {
-            name: text,
-            age: 'stary dziad',
-            row: row
-        },
-        success: function(msg) {
-            $('#table').html(msg);
-        },
-        complete: function() {
-        },
-        error: function() {
-            console.log( "Wystąpił błąd w połączniu :(");
-        }
-    });
-});
-
 $("span.glyphicon-trash").click(function(){
     var row = $(this).closest('tr').attr('row');
     $.ajax({
