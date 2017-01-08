@@ -23,9 +23,28 @@ $("span.glyphicon-pencil").click(function(){
 $(document).ready(function(){
     $(document).on("click", ".sendedit", function(){
         var row = $(this).closest('tr').attr('row');
-        //var name = $('input[id=name'+row+']').attr('value');
-        alert('kappa');
-        $(this).html(row);
+        var name = $('input[id=name'+row+']').attr('value');
+        var lastname = $('input[id=lastname'+row+']').attr('value');
+        var pesel = $('input[id=pesel'+row+']').attr('value');
+
+        if($.isNumeric(pesel) == true && pesel.length == 11 && $.isNumeric(name) == false && $.isNumeric(lastname) == false){
+            $.ajax({
+                type: "POST",
+                url: "php/ajax.php",
+                data: {
+                option: "edit",
+                row: row,
+                name: name,
+                lastname: lastname,
+                pesel: pesel
+            },
+                success: function(msg) {
+                $('#table').html(msg);
+            }
+            });
+        }else{
+            $('#adduser').html('Popraw błędy');
+        }
     });
     $(document).on("click", ".reloadpage", function(){
         alert('reload');

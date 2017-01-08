@@ -118,7 +118,7 @@ else if($_POST['option'] == 'add')
 else if($_POST['option'] == 'edit')
 {
     $ajax->row = $_POST['row'];
-    $ajax->col = $_POST['col'];
+array(ucfirst(strtolower($_POST['name'])),ucfirst(strtolower($_POST['lastname'])),$_POST['pesel']);
 }
 else
 {
