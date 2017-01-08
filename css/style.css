@@ -1,0 +1,13 @@
+.glyphicon-trash:hover
+{
+    color: #8e591b;
+    transition-duration: 0.2s;
+    transform: scale(1.4,1.4);
+}
+.glyphicon-pencil:hover
+{
+    color: #1b8e1f;
+    transition-duration: 0.2s;
+    transform: scale(1.4,1.4);
+}
+
