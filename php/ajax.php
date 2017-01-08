@@ -24,7 +24,7 @@ class AjaxDataModifier
         }else if($this->option == 'add'){
             $this->UserAdd($this->array, $this->person);
         }else if($this->option == 'edit'){
-            //$this->UserEdit();
+            $this->UserEdit($this->array, $this->row, $this->person);
         }
         //zapis do pliku
         @$this->SaveFile('test.csv', $this->array);
@@ -65,22 +65,36 @@ class AjaxDataModifier
         $data[$last] = $last.';'.$person[0].';'.$person[1].';'.$person[2];
         echo $data[$last];
     }
-    public function UserDelete(&$data, $row)
+    public function UserDelete($data, $row)
     {
+//        $i=0;
+//        foreach($data as $key => $line)
+//        {
+//            if($line != $key)
+//            {
+//                $data[$i] = $line;
+//                echo $data[$i].'<br />';
+//                $i++;
+//            }
+//        }
         $i=0;
-        foreach($data as $key => $line)
+        foreach($data as $x => $line)
         {
-            if($row != $key)
+            if($x != $row)
             {
-                $data[$i] = $line;
-                echo $data[$i].'<br />';
+                $tab[$i] = $line;
+                echo $tab[$i].'<br />';
                 $i++;
             }
+
         }
+        unset($data);
+        $this->array = $tab;
     }
-    public function UserEdit(&$data, $row)
+    public function UserEdit(&$data, $row, $person)
     {
-        
+        $data[$row] = $row.';'.$person[0].';'.$person[1].';'.$person[2];
+        echo $data[$row];
     }
     public function SaveFile($file, $data)
     {
@@ -118,7 +132,7 @@ else if($_POST['option'] == 'add')
 else if($_POST['option'] == 'edit')
 {
     $ajax->row = $_POST['row'];
-array(ucfirst(strtolower($_POST['name'])),ucfirst(strtolower($_POST['lastname'])),$_POST['pesel']);
+$ajax->person = array(ucfirst(strtolower($_POST['name'])),ucfirst(strtolower($_POST['lastname'])),$_POST['pesel']);
 }
 else
 {

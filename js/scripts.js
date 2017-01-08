@@ -23,9 +23,9 @@ $("span.glyphicon-pencil").click(function(){
 $(document).ready(function(){
     $(document).on("click", ".sendedit", function(){
         var row = $(this).closest('tr').attr('row');
-        var name = $('input[id=name'+row+']').attr('value');
-        var lastname = $('input[id=lastname'+row+']').attr('value');
-        var pesel = $('input[id=pesel'+row+']').attr('value');
+        var name = $('input[id=name'+row+']').val();
+        var lastname = $('input[id=lastname'+row+']').val();
+        var pesel = $('input[id=pesel'+row+']').val();
 
         if($.isNumeric(pesel) == true && pesel.length == 11 && $.isNumeric(name) == false && $.isNumeric(lastname) == false){
             $.ajax({
