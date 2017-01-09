@@ -37,7 +37,9 @@ class WebApp
     {
         if(isset($this->search))
         {
-            echo 'Wartość wyszukiwana: '.$this->search;
+            if($this->search != ''){
+                echo 'Wartość wyszukiwana: '.$this->search;
+            }
         }
     }
     public function SearchBar()

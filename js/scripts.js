@@ -1,17 +1,5 @@
 $("span.glyphicon-trash").click(function(){
-    var row = $(this).closest('tr').attr('row');
-    $.ajax({
-        type: "POST",
-        url: "php/ajax.php",
-        data: {
-            row: row,
-            option: "delete"
-        },
-        success: function(msg) {
-            $('#table').html(msg);
-        }
-    });
-    
+    $(this).closest('td').html('<span class="glyphicon glyphicon-ok deleteuser"> </span><span class="glyphicon glyphicon-remove reloadpage"></span>');
 });
 $("span.glyphicon-pencil").click(function(){
     var row = $(this).closest("tr").attr('row');
@@ -21,6 +9,21 @@ $("span.glyphicon-pencil").click(function(){
     $('tr[row='+row+']').html('<td>'+row+'</td><td><input value="'+one+'" id="name'+row+'" type="text" class="form-control" /></td><td><input id="lastname'+row+'" value="'+two+'" type="text" class="form-control" /></td><td><input id="pesel'+row+'" value="'+three+'" type="text" class="form-control" /></td><td><span class="sendedit glyphicon glyphicon-ok"></span> <span class="glyphicon glyphicon-remove reloadpage"></span></td>');
 });
 $(document).ready(function(){
+    $(document).on("click", ".deleteuser", function(){
+        var row = $(this).closest('tr').attr('row');
+
+    $.ajax({
+        type: "POST",
+        url: "php/ajax.php",
+        data: {
+            row: row,
+            option: "delete"
+        },
+        success: function(msg){
+            $('#table').html(msg);
+        }
+    });
+    });
     $(document).on("click", ".sendedit", function(){
         var row = $(this).closest('tr').attr('row');
         var name = $('input[id=name'+row+']').val();
@@ -47,7 +50,6 @@ $(document).ready(function(){
         }
     });
     $(document).on("click", ".reloadpage", function(){
-        alert('reload');
         location.reload();
     });
 });
